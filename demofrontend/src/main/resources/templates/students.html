@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xml:th="https://www.thymeleaf.org" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Students User</title>
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+        <style>
+            .container{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .flex-item{
+                flex-grow: 1;
+                max-width: 300px;
+                margin-top: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="card flex-item" style="width: 18rem;" th:each="student: ${students}">
+                <img class="card-img-top" alt="Card image cap" th:src="'https://picsum.photos/500/300?random='+${student.id}">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${student.names}"></h5>
+                    <p th:text="|Gender: ${student.gender}"></p>
+                    <p class="card-text" th:text="|Id: ${student.id}|"></p>
+                    <form th:action="@{/students/infos/{id} (id=${student.id})}" method="post">
+                        <button type="submit" formmethod="post" class="btn btn-success">View Information</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
